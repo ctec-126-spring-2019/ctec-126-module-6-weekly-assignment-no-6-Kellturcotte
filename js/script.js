@@ -5,7 +5,7 @@
 * All of the code must be adequetely commented.
 * This includes the code that you write and the code that was provided.
 */
-
+/* Kell Turcotte*/
 class PlayingCard {
     constructor(element, face, suit) {
         /*
@@ -16,8 +16,11 @@ class PlayingCard {
         - img (set this to `img/${face}_of_${suit}.png`)
         - state (set this to 0)
         */
-
-        // your code goes here (remove this comment once you have added your code)
+        this.element = element
+        this.suit = suit
+        this.face = face
+        this.img = `img/${face}_of_${suit}.png`
+        this.state = 0
 
         this.element.addEventListener('click', () => {
             /*
@@ -26,8 +29,14 @@ class PlayingCard {
             - It should also change the state if the card is flipped (this.state 0 or 1)
             - To show the back of the card use 'img/back.png'
             */
+            if (this.state == 0) {
+                this.element.src = this.img
+                this.state = 1
+            } else if (this.state == 1) {
+                this.img = 'img/back.png'
+                this.state = 0
+            }
 
-            // your code goes here (remove this comment once you have added your code)
         })
     }
 
@@ -47,7 +56,9 @@ function createCardImage() {
     - return the img
     */
 
-    // your code goes here (remove this comment once you have added your code)
+    const img = document.createElement('img')
+    img.setAttribute('src', 'img/back.png')
+    return img
 }
 
 function displayDeck() {
@@ -56,8 +67,9 @@ function displayDeck() {
     - in the loop, append the card.element to the container
     - Use a forEach with an arrow function
     */
-
-    // your code goes here (remove this comment once you have added your code)
+    deck.forEach(card => {
+        container.appendChild(card.element)
+    })
 }
 
 function shuffleDeck() {
@@ -90,7 +102,9 @@ function buildDeck() {
             - Do the .push and object creation in a single statement
             */
 
-            // your code goes here (remove this comment once you have added your code)
+            const img = createCardImage()
+            img.setAttribute('id', `${face}_of_${suit}.png`)
+            deck.push(new PlayingCard(img, face, suit))
         })
     })
 }
